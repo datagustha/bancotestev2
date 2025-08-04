@@ -6,7 +6,8 @@ import mysql.connector
 from mysql.connector import errorcode
 import pandas as pd
 
-valor = 1
+
+valor = 0
 
 while True:
 
@@ -24,7 +25,7 @@ while True:
                 database="dbsimfacilita",
             )
             print("conexao bem sucedida! ✅")
-
+            break
         except mysql.connector.Error as error:
             print("não foi possivel conectar")
 
@@ -36,9 +37,7 @@ cursor = mydb.cursor()
 
 
 db = pd.read_sql(
-    """
-select * from fpgtoSemearBoleto order by dtpgto desc , cliente desc limit 10
-""",
+    "select * from fpgtoSemearBoleto order by dtpgto desc , cliente desc",
     con=mydb,
 )
 
@@ -57,5 +56,9 @@ pd.set_option("display.width", None)
 colunas = ["cliente", "contrato", "dtPgto"]
 
 db = db[colunas]
+
+# limite linhas
+
+db = db.iloc[:3]
 
 print(db)
