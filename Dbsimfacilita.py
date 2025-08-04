@@ -59,6 +59,6 @@ db = db[colunas]
 
 # limite linhas
 
-db = db.iloc[:5]
+db = db.iloc[:2]
 
 print(db)
